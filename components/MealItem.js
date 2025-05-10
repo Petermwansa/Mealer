@@ -1,24 +1,32 @@
-import { View, Text, Pressable, Image, StyleSheet, Platform } from 'react-native'
-import React from 'react'
+import { View, Text, Pressable, Image, StyleSheet, Platform } from 'react-native';
+import React from 'react';
+import { useNavigation } from '@react-navigation/native';
+import MealDetails from './MealDetails';
 
-const MealItem = ({ title, imageUrl, duration, complexity, affordability }) => {
+const MealItem = ({ id, title, imageUrl, duration, complexity, affordability }) => {
+
+    const navigation  = useNavigation();
+
+
+    const selectMealItemHandler = () => {
+        navigation.navigate("MealDetails", {
+            mealId: id,
+        })
+    }
 
   return (
     <View style={styles.mealItem}>
         <Pressable 
             android_ripple={{color: '#ccc'}}
             style={({pressed}) => pressed ? styles.buttonPressed : null}
+            onPress={selectMealItemHandler}
         >
             <View style={styles.innerContainer}>
                 <View>
                     <Image source={{ uri: imageUrl }} style={styles.image} />
                     <Text style={styles.title}>{title}</Text>
                 </View>
-                <View style={styles.details}>
-                    <Text style={styles.detailItem}>{duration}m</Text>
-                    <Text style={styles.detailItem}>{complexity.toUpperCase()}</Text>
-                    <Text style={styles.detailItem}>{affordability.toUpperCase()}</Text>
-                </View>
+                <MealDetails duration={duration} complexity={complexity} affordability={affordability}/>
             </View>
         </Pressable>
     </View>
@@ -55,16 +63,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 18,
         margin: 8,
-    },
-    details: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: 8
-    },
-    detailItem: {
-        marginHorizontal: 4,
-        fontSize: 12,
     },
     buttonPressed: {
         opacity: 0.5
