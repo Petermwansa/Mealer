@@ -57,7 +57,6 @@ const MealDetailsScreen = ({route, navigation}) => {
 export default MealDetailsScreen
 
 
-
 const styles = StyleSheet.create({ 
     rootContainer: {
       marginBottom: 32,
@@ -83,3 +82,6 @@ const styles = StyleSheet.create({
       width: '80%',
     }
 })
+
+
+
