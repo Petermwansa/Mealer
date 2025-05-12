@@ -11,7 +11,7 @@ const MealDetails = ({duration, complexity, affordability, style, textStyle}) =>
   )
 }
 
-export default MealDetails
+export default MealDetails;
 
 const styles = StyleSheet.create({
     details: {
